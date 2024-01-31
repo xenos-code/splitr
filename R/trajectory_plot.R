@@ -56,26 +56,12 @@ trajectory_plot <- function(x,
   
   traj_plot <- 
     leaflet::leaflet() %>%
-    leaflet::addProviderTiles(
-      provider = "OpenStreetMap",
-      group = "OpenStreetMap"
-    ) %>%
-    leaflet::addProviderTiles(
-      provider = "CartoDB.DarkMatter",
-      group = "CartoDB Dark Matter"
-    ) %>%
-    leaflet::addProviderTiles(
-      provider = "CartoDB.Positron",
-      group = "CartoDB Positron"
-    ) %>%
-    leaflet::addProviderTiles(
-      provider = "Esri.WorldTerrain",
-      group = "ESRI World Terrain"
-    ) %>%
-    leaflet::addProviderTiles(
-      provider = "Stamen.Toner",
-      group = "Stamen Toner"
-    ) %>%
+    leaflet::addProviderTiles(provider = "Esri.WorldImagery",group = "Esri.WorldImagery") %>%
+    leaflet::addProviderTiles(provider = "Esri.WorldTerrain",group = "ESRI World Terrain") %>%
+    leaflet::addProviderTiles(provider = "Esri.WorldTopoMap",group = "Esri.WorldTopoMap") %>%
+    leaflet::addProviderTiles(provider = "Esri.WorldPhysical",group = "Esri.WorldPhysical") %>%
+    leaflet::addProviderTiles(provider = "CartoDB.DarkMatter",group = "CartoDB.DarkMatter") %>%
+    leaflet::addProviderTiles(provider = "Stadia.StamenTerrain",group = "Stadia.StamenTerrain") %>%
     leaflet::fitBounds(
       lng1 = min(traj_df[["lon"]]),
       lat1 = min(traj_df[["lat"]]),
@@ -84,8 +70,12 @@ trajectory_plot <- function(x,
     ) %>%
     leaflet::addLayersControl(
       baseGroups = c(
-        "CartoDB Positron", "CartoDB Dark Matter",
-        "Stamen Toner", "ESRI World Terrain"
+        "Esri.WorldImagery", 
+        "Esri.WorldTerrain",
+        "Esri.WorldTopoMap",
+        "Esri.WorldPhysical",
+        "CartoDB.DarkMatter",
+        "Stadia.StamenTerrain"
       ),
       overlayGroups = c("trajectory_points", "trajectory_paths"),
       position = "topright"
